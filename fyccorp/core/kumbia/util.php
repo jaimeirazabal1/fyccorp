@@ -265,4 +265,9 @@ class Util
         $fecha2=strtotime($fecha2);
         return $fecha1 > $fecha2;
     }
+    public static function pre($p){
+        echo "<pre>";
+        print_r(json_decode(json_encode($p)));
+        echo "</pre>";
+    }
 }

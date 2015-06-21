@@ -1,4 +1,5 @@
 <?php echo View::content() ?>
+<?php echo Tag::js("utils") ?>
 <h1>Horas</h1>
 <?php $counter = 1 ?>
 <p><?php echo $dias_diferencia ?> dias</p>
@@ -7,7 +8,13 @@
 	<?php if ($i%7 == 0): ?>
 			
 		<fieldset>
-			<legend> <?php echo $semana = "Semana ".$counter ?> <button class="btn btn-primary btn-xs">Guardar</button></legend>
+		<?php echo Form::open() ?>
+			<legend> <?php echo $semana = "Semana ".$counter ?> <input type="submit" name="guardar_horas" class="btn btn-primary btn-xs" value="Guardar"></legend>
+			<?php $hora_actual = $horas->getDatosDeHorasByActividadYSemana($actividad->id,$semana) ?>
+			<input type="hidden" name="horas[id]" value="<?php echo isset($hora_actual->id) ? $hora_actual->id: null ?>">
+			<input type="hidden" name="horas[recursohumano_id]" value="<?php echo Auth::get('id') ?>">
+			<input type="hidden" name="horas[semana]" value="<?php echo $semana ?>">
+			<input type="hidden" name="horas[actividades_id]" value="<?php echo $actividad->id ?>">
 			<table class="table table-bordered table-striped" >
 				<thead>
 					<th>Descripcion</th>
@@ -59,31 +66,32 @@
 				</thead>
 				<tbody>
 					<tr semana="<?php echo str_replace(" ", "_", $semana)?>">
-						<td contenteditable class="textarea" id="descripcion"></td>
-						<td contenteditable class="textarea" id="lunes"></td>
-						<td contenteditable class="textarea" id="martes"></td>
-						<td contenteditable class="textarea" id="miercoles"></td>
-						<td contenteditable class="textarea" id="jueves"></td>
-						<td contenteditable class="textarea" id="viernes"></td>
-						<td contenteditable class="textarea" id="sabado"></td>
-						<td contenteditable class="textarea" id="domingo"></td>
-						<td contenteditable class="textarea" id="total"></td>
+						<td  class="textarea descripcion "  style="padding:0px"><textarea class="boxsizingBorder aumentoHeigh" name="horas[descripcion]" id="descripcion"><?php echo isset($hora_actual->descripcion) ? $hora_actual->descripcion : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[lunes]" maxlength='2' maxlength='2' id="lunes"><?php echo isset($hora_actual->lunes) ? $hora_actual->lunes : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[martes]" maxlength='2' id="martes"><?php echo isset($hora_actual->martes) ? $hora_actual->martes : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[miercoles]" maxlength='2' id="miercoles"><?php echo isset($hora_actual->miercoles) ? $hora_actual->miercoles : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[jueves]" maxlength='2' id="jueves"><?php echo isset($hora_actual->jueves) ? $hora_actual->jueves : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[viernes]" maxlength='2' id="viernes"><?php echo isset($hora_actual->viernes) ? $hora_actual->viernes : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[sabado]" maxlength='2' id="sabado"><?php echo isset($hora_actual->sabado) ? $hora_actual->sabado : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh dia" name="horas[domingo]" maxlength='2' id="domingo"><?php echo isset($hora_actual->domingo) ? $hora_actual->domingo : null ?></textarea></td>
+						<td  class="textarea" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder aumentoHeigh" name="horas[total]" readonly id="total"><?php echo isset($hora_actual->total) ? $hora_actual->total : null ?></textarea></td>
 					</tr>
 					<tr horasextras="1" semana="<?php echo str_replace(" ", "_", $semana)?>">
 						<td> <center><b>Horas Extras</b></center></td>
-						<td contenteditable class="textarea"  id="lunes_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="martes_e"class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="miercoles_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="jueves_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="viernes_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="sabado_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" id="domingo_e" class="horas_extras textarea"> </td>
-						<td contenteditable class="textarea" ></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[lunes_e]" id="lunes_e"><?php echo isset($hora_actual->lunes_e) ? $hora_actual->lunes_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[martes_e]" id="martes_e"><?php echo isset($hora_actual->martes_e) ? $hora_actual->martes_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[miercoles_e]" id="miercoles_e"><?php echo isset($hora_actual->miercoles_e) ? $hora_actual->miercoles_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[jueves_e]" id="jueves_e"><?php echo isset($hora_actual->jueves_e) ? $hora_actual->jueves_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[viernes_e]" id="viernes_e"><?php echo isset($hora_actual->viernes_e) ? $hora_actual->viernes_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[sabado_e]" id="sabado_e"><?php echo isset($hora_actual->sabado_e) ? $hora_actual->sabado_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px"><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras dias_extras" row="1" maxlength='2' name="horas[domingo_e]" id="domingo_e"><?php echo isset($hora_actual->domingo_e) ? $hora_actual->domingo_e : null ?></textarea></td>
+						<td  class="horas_extras" style="padding:0px" id=""><textarea onkeypress="ValidaSoloNumeros()" class="boxsizingBorder horas_extras" name="horas[total_e]" readonly id="total_e"><?php echo isset($hora_actual->total_e) ? $hora_actual->total_e: null ?></textarea></td>
 					</tr>
 				</tbody>
 			</table>
 		</fieldset>
 		<?php $counter++ ?>
+		<?php echo Form::close() ?>
 	<?php endif; ?>
 <?php endfor; ?>
 <br>
@@ -96,18 +104,64 @@
 		background-opacity: 0.3;
 		
 	}
-
-
+	.textarea{
+		max-width:300px;
+		height:auto;
+	}
+	.boxsizingBorder {
+		width:100%;
+	    -webkit-box-sizing: border-box;
+	       -moz-box-sizing: border-box;
+	            box-sizing: border-box;
+	            border:none;
+	    
+	}
+	.aumentoHeigh{
+		height:100px;
+	}
+	.descripcion{
+		width:300px;
+	}
 </style>
 
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("body").on("keyup","[contenteditable]",function(){
-			semana = $(this).parent().attr("semana");
-			horas_extra = $(this).parent().attr("horasextras");
-			console.log(semana,horas_extra)
+		// $("body").on("keyup","[]",function(){
+		// 	semana = $(this).parent().attr("semana");
+		// 	horas_extra = $(this).parent().attr("horasextras");
+		// 	console.log(semana,horas_extra)
+		// })
+		$('body').on("keyup",".dia",function(){
+			padre = $(this).parent().parent();
+			dias = padre.find(".dia");
+			total = padre.find("#total");
+			suma = 0;
+			dias.each(function(i){
+				if (validarSiNumero(parseInt(this.value))) {
+					// console.log(this.value)
+					valor = parseInt(this.value);
+					suma = suma + valor;
+				};
+			})
+			// console.log("Suma: "+suma)
+			total.val(suma);
+		})
+		$('body').on("keyup",".dias_extras",function(){
+			padre = $(this).parent().parent();
+			dias = padre.find(".dias_extras");
+			total = padre.find("#total_e");
+			suma = 0;
+			dias.each(function(i){
+				if (validarSiNumero(parseInt(this.value))) {
+					// console.log(this.value)
+					valor = parseInt(this.value);
+					suma = suma + valor;
+				};
+			})
+			// console.log("Suma: "+suma)
+			total.val(suma);
 		})
 	})
 </script>

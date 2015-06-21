@@ -23,6 +23,10 @@ class Horas extends ActiveRecord{
 		
 		return $this->find_all_by_sql($query);
 	}
+	public function getDatosDeHorasByActividadYSemana($actividad_id,$semana){
+		$horas = $this->find_first("conditions: actividades_id='$actividad_id' and semana='$semana'");
+		return $horas;
+	}
 }
 
  ?>
