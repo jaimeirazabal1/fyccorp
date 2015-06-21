@@ -1,0 +1,82 @@
+<style>
+  .data input, .data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+
+<?php View::content() ?>
+<div class="titulo-proyectos">NUEVO PERSONAL</div>
+
+<section class="data">
+<?php echo Form::openMultipart() ?>
+  <b>Ingrese los siguientes datos y verifique.</b>
+
+  <div class="form-group" style="margin-top:10px;">
+    <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Nombre (*)</label>
+      <?php echo Form::text("empleado.nombre","class='form-control input-sm' placeholder='nombre' required") ?>
+    </div>
+     <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Apellido (*)</label>
+      <?php echo Form::text("empleado.apellido","class='form-control input-sm' placeholder='apellido' required") ?>
+    </div>
+    <div style="float:left;width:26%;">
+      <label for="">Cédula (*)</label>
+      <?php echo Form::text("empleado.cedula","class='form-control input-sm' placeholder='número de identificación' required") ?>
+    </div>
+    <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Teléfono</label>
+      <?php echo Form::text("empleado.telefono","class='form-control input-sm' placeholder='0000'") ?>
+    </div>
+     <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Correo (*)</label>
+      <?php echo Form::email("empleado.correo","class='form-control input-sm' placeholder='email' required") ?>
+    </div>
+    <div style="float:left;width:26%;">
+      <label for="">Tipo (*)</label>
+        <?php 
+         $tipo= array(
+        '1'=>'Empleado',
+        '2'=>'Contratado');
+        echo Form::Select('empleado.tipo', $tipo,"form-control input-sm' style='width:100%;font-size:12px;' required");
+        ?>
+    </div>
+     <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Perfil</label><br>
+      <span style="font-size:12px;">Formatos: .jpg, .jpeg, .gif, .png</span><div class='custom-input-file btn-sm'><?php echo Form::file('perfil',"","name='perfil'") ?>Imagen de Perfil</div>
+    </div>
+     <div style="float:left;width:35%;margin-right:2%;">
+      <label for="">Cargo General (*)</label>
+      <?php echo Form::text("empleado.cargo","class='form-control input-sm' placeholder='cargo general de la persona' required") ?>
+    </div>
+    <div style="float:left;width:26%;">
+      <label for="">Fecha Ingreso (*)</label><br>
+      <input type="text" id="empleado_fecha_ingreso" data-format="YYYY-MM-DD" data-template="D M YYYY" name="empleado[fecha_ingreso]">   
+    </div>
+    <label for="">Dirección</label>
+      <?php echo Form::textarea("empleado.direccion","class='form-control input-sm' placeholder='dirección de habitación'") ?>
+  </div>
+
+  <?php echo Form::hidden("empleado.fecha_egreso") ?>
+  <?php echo Form::hidden("empleado.usuario_id",NULL,0) ?>
+
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("personal/index","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>
+
+<script>
+$(function(){
+    $('#empleado_fecha_ingreso').combodate();    
+});
+</script>

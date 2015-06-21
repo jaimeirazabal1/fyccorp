@@ -1,0 +1,82 @@
+           <div id="menuinteractivo" class="menuinteractivo" style="width:15%;float:right;background:#111">
+                <div class="menuinter" >
+                  <?php if (Auth::is_valid()): ?>
+                 
+                 <?php $id=Auth::get("id");  ?>
+
+                  <div>
+                    <div id='cssmenu'>
+                        <ul>
+
+                               <li class='has-sub'><a href='#'><span><?php echo Auth::get("nombre") ?></span></a>
+                                  <ul>
+                                     <li><?php echo Html::link("usuarios/editar_cuenta/$id","<span class='glyphicon glyphicon-edit'></span> Editar mi Perfil") ?></li>
+                                  </ul>
+                               </li>
+                           
+                                <li class='active' ><a href="#" style="background:#077678;color:#fff;text-shadow:none;">Administración</a></li>
+                                  <li class='has-sub'><a href='#'><span>Usuarios</span></a>
+                                  <ul>
+                                    <li><?php echo Html::link("usuarios/listado_usuarios","<span class='glyphicon glyphicon-th-list'></span> Listado de Usuarios") ?></li>
+                                    <li><?php echo Html::link("usuarios/nuevo","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Usuario") ?></li>
+                                  </ul>
+                                  <li class='has-sub'><a href='#'><span>Deportes</span></a>
+                                  <ul>
+                                    <li><?php echo Html::link("deportes","<span class='glyphicon glyphicon-th-list'></span> Listado de Deportes") ?></li>
+                                     <li><?php echo Html::link("deportes/ligas","<span class='glyphicon glyphicon-th-list'></span> Listado de Ligas") ?></li>
+                                     <li><?php echo Html::link("deportes/divisiones","<span class='glyphicon glyphicon-th-list'></span> Listado de Divisiones") ?></li>
+                                     <li><?php echo Html::link("deportes/equipos","<span class='glyphicon glyphicon-th-list'></span> Listado de Equipos") ?></li>
+                                      <li><?php echo Html::link("deportes/nuevo_","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Equipo") ?></li>
+                                     <li><?php echo Html::link("deportes/nueva_liga","<span class='glyphicon glyphicon-plus-sign'></span> Nueva Liga") ?></li>
+                                     <li><?php echo Html::link("deportes/nueva_division","<span class='glyphicon glyphicon-plus-sign'></span> Nueva División") ?></li>
+                                     
+                                    <li><a href="<?php echo PUBLIC_PATH?>deportes#nuevodeporte" onclick="config()">Nuevo Deporte</a></li>
+                                  </ul>
+                                  <li class='has-sub'><a href='#'><span>Juegos</span></a>
+                                  <ul>
+                                     <li><?php echo Html::link("juegos/index","<span class='glyphicon glyphicon-th-list'></span> Listado de Juegos") ?></li>
+                                     <li><?php echo Html::link("juegos/nuevo","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Juego") ?></li>
+                                  </ul>
+                                  <li class='has-sub'><a href='#'><span>Logros</span></a>
+                                  <ul>
+                                     <li><?php echo Html::link("usuarios/listado_usuarios","<span class='glyphicon glyphicon-th-list'></span> Listado de Logros") ?></li>
+                                     <li><?php echo Html::link("usuarios/listado_usuarios","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Logro") ?></li>
+                                  </ul>
+
+                               </li>
+                              
+                               <li class='has-sub'><a href='#' style="background:#077678;color:#fff;text-shadow:none;"><span>Clientes</span></a>
+                                  <ul>
+                                     <li><?php echo Html::link("usuarios/clientes","<span class='glyphicon glyphicon-th-list'></span> Listado de Clientes") ?></li>
+                                     <li><?php echo Html::link("usuarios/nuevo_cliente","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Cliente") ?></li>
+                                  </ul>
+                               </li>
+                      
+                               <li class='has-sub'><a href='#'><span>Bancas</span></a>
+                                  <ul>
+                                     <li><?php echo Html::link("bancas/index","<span class='glyphicon glyphicon-th-list'></span> Listado de Bancas") ?></li>
+                                     <li><?php echo Html::link("bancas/nueva","<span class='glyphicon glyphicon-plus-sign'></span> Nueva Banca") ?></li>
+                                  </ul>
+                               </li>
+                           
+                               <li class='has-sub'><a href='#'><span>Agencias</span></a>
+                                  <ul>
+                                      <li><?php echo Html::link("agencias/index","<span class='glyphicon glyphicon-th-list'></span> Listado de Agencias") ?></li>
+                                     <li><?php echo Html::link("agencias/nueva","<span class='glyphicon glyphicon-plus-sign'></span> Nueva Agencia") ?></li>
+                                  </ul>
+                               </li>
+                               
+        
+
+                           <li class='last'> <?php echo Html::link("usuarios/logout",'Salir <span class="glyphicon glyphicon-off" style="float:right;"></span>','style="color:#fff;background:#000"') ?></li>
+
+                        </ul>
+                  
+
+                    
+                  </div>
+                  <?php endif ?>
+                
+                </div>
+          </div>
+        </div>

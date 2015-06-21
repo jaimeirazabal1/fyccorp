@@ -1,0 +1,62 @@
+<?php View::content() ?>
+<div class="titulo-proyectos">NUEVA ACTIVIDAD AL PROYECTO <b style="color:#333;"><?php echo $proyecto->nombre ?></b></div>
+
+<style>
+  .data input, .data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+
+
+<section class="data">
+<?php echo Form::openMultipart() ?>
+
+  <div class="form-group" style="margin-top:10px;">
+    <div style="float:left;width:100%;">
+      <label for="">Nombre de la actividad (*)</label>
+      <?php echo Form::text("actividades.nombre","class='form-control input-sm' placeholder='nombre' required") ?>
+    </div>
+     <div style="float:left;width:20%;margin-right:2%;">
+      <label for="">Estatus (*)</label>
+        <?php 
+         $estatus= array(
+        '1'=>'Activa',
+        '2'=>'Completada',
+        '3'=>'Pospuesta',
+        '0'=>'Inactiva');
+        echo Form::Select('actividades.estado', $estatus,"form-control input-sm' style='width:100%;font-size:12px;' required");
+        ?>
+    </div>
+     <div style="float:left;width:20%;margin-right:2%;">
+      <label for="">Fecha de Inicio (*)</label><br>
+      <input type="text" id="actividades_comienzo" data-format="YYYY-MM-DD" data-template="D M YYYY" name="actividades[comienzo]">   
+    </div>
+    <div style="float:left;width:20%;">
+      <label for="">Fecha de Finalización (*)</label><br>
+      <input type="text" id="actividades_fin" data-format="YYYY-MM-DD" data-template="D M YYYY" name="actividades[fin]">   
+    </div>
+ <div style="float:left;width:100%;margin-right:2%;">
+      <label for="">Notas (*)</label>
+      <?php echo Form::textarea("actividades.notas","class='form-control input-sm' placeholder='descripción general del proyecto' rows='6'") ?>
+    </div>
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("proyectos/configuraciones/$proyecto->id","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>
+
+<script>
+$(function(){
+    $('#actividades_comienzo').combodate();  
+    $('#actividades_fin').combodate();    
+});
+</script>

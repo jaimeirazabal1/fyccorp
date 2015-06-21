@@ -1,0 +1,37 @@
+<div class="menu" style="height:100%">
+	<center><?php echo Html::img("default/logo.jpg","","style='width:50%;margin:auto,padding:20px;'") ?></center>
+    
+    <div class="info-perfil">
+        <p>
+            <?php if (Auth::get("empleado_id")=='0' or Auth::get("empleado_id")==''): ?>
+                <?php  if (Auth::get("admin")=='1'): ?>
+                    <b><?php echo Html::link("config/index","Menú Principal"); ?></b><br>
+                    <b>Usuario:</b> Administrador | <?php echo Html::link("index/logout","Salir"); ?>
+                <?php endif ?>
+            <?php else: ?>
+                <b><?php echo Html::link("config/index","Menú Principal"); ?></b><br>
+                <?php $datos = Load::model("empleado")->find(Auth::get("empleado_id")); ?>
+                <?php echo Html::img($datos->perfil,"","style='width:50px;margin-left:10px;'") ?>
+                <?php echo Auth::get("usuario") ?>
+                 | <?php echo Html::link("index/logout","Salir"); ?>
+            <?php endif ?>
+        </p>
+    </div>
+    <div class="opt-proyectos">
+    	<ul>
+    		<li><p>PROYECTOS</p></li>
+    		<li><?php echo Html::link("proyectos","<span class='glyphicon glyphicon-list-alt'></span> Listado de Proyectos") ?></li>
+    		<li><?php echo Html::link("proyectos/nuevo","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo proyecto") ?></li>
+    	</ul>
+    </div>
+    <div class="opt-proyectos">
+    	<ul>
+    		<li><p>RECURSOS</p></li>
+    		<li><?php echo Html::link("proyectos/recursos","<span class='glyphicon glyphicon-list-alt'></span> Listado de Recursos") ?></li>
+    		<li><?php echo Html::link("proyectos/nuevo_recurso","<span class='glyphicon glyphicon-plus-sign'></span> Nuevo Recurso") ?></li>
+            <li><?php echo Html::link("proyectos/categorias","<span class='glyphicon glyphicon-list-alt'></span> Listado de Categorías") ?></li>
+            <li><?php echo Html::link("proyectos/nueva_categoria","<span class='glyphicon glyphicon-plus-sign'></span> Nueva Categoría") ?></li>
+    	</ul>
+    </div>
+</div>
+

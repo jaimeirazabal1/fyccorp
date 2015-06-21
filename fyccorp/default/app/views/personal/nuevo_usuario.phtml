@@ -1,0 +1,68 @@
+<style>
+  .data input,.data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+<?php View::content() ?>
+<div class="titulo-proyectos">NUEVO USUARIO</div>
+
+<section class="data">
+<?php echo Form::open() ?>
+  <b>Ingrese los siguientes datos y verifique.</b>
+
+  <div class="form-group" style="margin-top:10px;">
+    <div style="float:left;width:49%;margin-right:2%;">
+    <label for="">Usuario (*)</label>
+    <?php echo Form::text("usuario.usuario","class='form-control input-sm' placeholder='usuario' required") ?>
+    </div>
+     <div style="float:left;width:49%;">
+      <label for="">Clave (*)</label>
+      <?php echo Form::pass("usuario.clave","class='form-control input-sm' placeholder='***' required") ?>
+    </div>
+        <div style="float:left;width:49%;margin-right:2%;">
+      <label for="">Si el usuario es un empleado o contratado seleccione a continuación:</label>
+        <?php echo Form::dbSelect('usuario.empleado_id', 'nombre', array('empleado','buscar'), ' Seleccione ','class="form-control input-sm"'); ?>
+    </div>
+     <div style="float:left;width:29%;margin-right:2%;">
+        <label for="">Estatus (*)</label>
+        <?php 
+         $estatus= array(
+        '1'=>'Activo',
+        '0'=>'Inactivo');
+        echo Form::Select('usuario.status', $estatus,"form-control input-sm' style='width:100%;font-size:12px;'");
+        ?>
+    </div>
+     <div style="float:left;width:18%;">
+      <?php if (Auth::get("admin")=='1'): ?>
+        <label for="">Admin</label>
+        <?php 
+         $admin= array(
+        '0'=>'No',
+        '1'=>'Sí');
+        echo Form::Select('usuario.admin', $admin,"form-control input-sm' style='width:100%;font-size:12px;'");
+        ?>
+      <?php else: ?>
+        <label for="">Admin</label>
+        <?php 
+         $admin= array(
+        '0'=>'No');
+        echo Form::Select('usuario.admin', $admin,"form-control input-sm' style='width:100%;font-size:12px;'");
+        ?>
+      <?php endif ?>
+    </div>
+  </div>
+
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("clientes/index","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>

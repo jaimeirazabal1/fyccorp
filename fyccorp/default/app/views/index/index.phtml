@@ -1,0 +1,47 @@
+<div style="position:relative;"><h4>Login</h4></div>
+<hr/>
+
+<?php echo Form::open("index/autenticado") ?>
+<div id="login">
+  <div class="form-group" style="margin-bottom:10px;padding-bottom:0">
+    <label>Username</label>
+    <input type="text" class="form-control" name="usuario" placeholder="" required>
+    
+    <label style="margin-top:10px;">Password</label>
+    <input type="password" class="form-control" name="clave" placeholder="" required>
+  </div>
+  
+  <label><a href="#recuperar" onclick="recuperarcuenta()" style="color:#0F8A8C;font-size:12px;padding:0;">¿Ha olvidado su contraseña?</a></label>  
+  
+  <div class="btn-search" style="margin-top:10px;">  
+    <div href="#" class="btn btn-default" style="background:rgb(10,100,120);border:0px;width:131px;position:relative;width:100%;float:right"><input type="submit" value="Acceder" style="background:rgb(10,100,120);border:0px;color:#fff"/></div>
+  </div>
+</div>
+<?php echo Form::close() ?>
+
+<div id="recupera" style="display:none;">
+  <p style="font-size:12px;">Introduce el correo electrónico relacionado a tu usuario</p>
+
+  <?php echo Form::open() ?>
+    <div style="margin-bottom:10px;margin-top:20px;">
+      <?php echo Form::text("cliente.correo","class='form-control' placeholder='correo electrónico'") ?>
+      <br>
+      <button class="btn btn-primary" type="submit" style="float:right;border-radius:0px;" disabled=disabled>Enviar</button>
+    </div>
+  <?php echo Form::close() ?>
+
+  <div style="margin-top:10px;margin-bottom:15px;"><a href="#login" onclick="login()">Volver</a></div>
+</div>
+
+<script type="text/javascript">
+  function recuperarcuenta(){
+  document.getElementById('recupera').style.display = 'block';
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('mensaje').style.display = 'none';
+  }
+  function login(){
+  document.getElementById('recupera').style.display = 'none';
+  document.getElementById('login').style.display = 'block';
+  document.getElementById('mensaje').style.display = 'block';
+  }
+</script>

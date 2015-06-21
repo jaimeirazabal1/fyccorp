@@ -1,0 +1,51 @@
+<?php View::content() ?>
+<style>
+  .data input, .data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+<div class="titulo-proyectos">PROYECTO: <b style="color:#333;"><?php echo $proyecto->nombre ?></b><br><p style="color:grey;font-size:12px;line-height:14px;margin-top:10px;"><?php echo $proyecto->descripcion ?></p></div>
+
+<section class="data">
+  <p style="text-align:center;" class="titulo-proyectos">Listado de Actividades</p>
+  <div><?php echo Html::link("proyectos/nueva_actividad/$proyecto->id","<span class='glyphicon glyphicon-plus-sign'></span> Nueva Actividad") ?></div>
+      <fieldset style="margin:5px;">
+          <table class="table table-striped datatable" style="font-size:12px;">
+            <thead>
+              <th style="text-align:center;">Id</th>
+              <th>Nombre</th>
+              <th>Duración</th>
+              <th>Comienzo</th>
+              <th>Fin</th>
+              <th>Estado</th>
+            </thead>
+            <?php foreach ($actividades as $value): ?>
+               <tr>
+                   <td style="text-align:center;"><?php echo $value->id ?></td>
+                   <td><?php echo $value->nombre ?></td>
+                   <td><?php echo Html::link("horas/index/{$value->id}","Horas") ?></td>
+                   <td><?php echo $value->comienzo ?></td>
+                   <td><?php echo $value->fin ?></td>
+                   <td>
+                    <?php if ($value->estado=='1'): ?>
+                      Activa
+                    <?php elseif ($value->estado=='2'): ?>
+                      Completada
+                    <?php elseif ($value->estado=='3'): ?>
+                      Pospuesta
+                    <?php else: ?>
+                      Inactiva
+                    <?php endif ?>
+                   </td>
+                </tr>
+            <?php endforeach ?>
+          </table>
+      </fieldset>
+    </section>

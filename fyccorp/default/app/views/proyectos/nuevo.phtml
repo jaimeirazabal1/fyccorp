@@ -1,0 +1,56 @@
+<?php View::content() ?>
+<div class="titulo-proyectos">NUEVO PROYECTO</div>
+
+<section class="busqueda-proyecto">	
+  <p><b>Nota:</b> Recuerde que para crear un proyecto es necesario crear al cliente para llevar mayor control de su información, así como la persona encargada del proyecto, que deberá ser un empleado de la empresa, de no contar con ninguno de estos datos no podrá crear el proyecto. <br><i>Si no tiene acceso para ingresar esta información comuníquese con su líder directo.</i></p>
+</section>
+
+<style>
+  .data input, .data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+
+
+<section class="data">
+<?php echo Form::openMultipart() ?>
+
+  <div class="form-group" style="margin-top:10px;">
+    <div style="float:left;width:100%;margin-right:2%;">
+      <label for="">Nombre del Proyecto (*)</label>
+      <?php echo Form::text("proyecto.nombre","class='form-control input-sm' placeholder='nombre' required") ?>
+    </div>
+  	
+  	<div style="float:left;width:49%;margin-right:2%;">
+      <label for="">Cliente:</label>
+        <?php echo Form::dbSelect('proyecto.cliente_id', 'nombre', array('cliente','buscar'), ' Seleccione ','class="form-control input-sm"'); ?>
+    </div>
+    <div style="float:left;width:49%;">
+      <label for="">Responsable (Persona encargada del proyecto):</label>
+        <?php echo Form::dbSelect('proyecto.responsable', 'nombre', array('empleado','buscarempleado'), ' Seleccione ','class="form-control input-sm"'); ?>
+    </div>
+ <div style="float:left;width:100%;margin-right:2%;">
+      <label for="">Descripción del Proyecto (*)</label>
+      <?php echo Form::textarea("proyecto.descripcion","class='form-control input-sm' placeholder='descripción general del proyecto' rows='6' required") ?>
+    </div>
+
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("personal/index","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>
+
+<script>
+$(function(){
+    $('#empleado_fecha_ingreso').combodate();    
+});
+</script>

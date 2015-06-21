@@ -1,0 +1,34 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+<?php View::content() ?>
+<div class="titulo-proyectos">EDITAR LA CATEGORÍA: <?php echo $categorias->nombre ?></div>
+
+<section class="data">
+<?php echo Form::open() ?>
+  <b>Ingrese los siguientes datos y verifique.</b>
+
+  <div class="form-group" style="margin-top:10px;">
+    <label for="">Nombre (*)</label>
+    <?php echo Form::text("categorias.nombre","class='form-control input-sm' placeholder='nombre de la categoria'") ?>
+    <label for="">Descripción</label>
+    <?php echo Form::textarea("categorias.descripcion","class='form-control input-sm' placeholder='descripción de la categoría'") ?>
+  </div>
+
+  <?php echo Form::hidden("categorias.id") ?>
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Editar"/>
+    <?php echo Html::link("proyectos/categorias","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>

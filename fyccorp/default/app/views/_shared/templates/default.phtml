@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta http-equiv='Content-type' content='text/html; charset=<?php echo APP_CHARSET ?>' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.6">
+  <title>Fyccorp App</title>
+    <?php Tag::css('bienvenida') ?>
+    <?php Tag::css('style') ?>
+    <?php Tag::css('bootstrap/css/bootstrap') ?>
+    <?php Tag::css('datatable/css/jquery.dataTables.min') ?>
+    <?php echo Html::includeCss() ?> 
+    <?php echo Tag::js("jquery.min") ?>
+    <?php echo Tag::js("bootstrap/js/bootstrap.min") ?>
+    <?php echo Tag::js("datatable/jquery") ?>
+    <?php echo Tag::js("datatable/jquery.dataTables.min") ?>
+ </head>
+  <body style="background:#fff">
+   <section class="contenedor-login">
+    <center><?php echo Html::img("default/logo.jpg","","style='width:150px;margin:auto;padding-bottom:10px;'") ?></center>
+      <section class="login">
+        <?php echo View::content(); ?>
+      </section>
+   </section>
+ </body>
+</html>

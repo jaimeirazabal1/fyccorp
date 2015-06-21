@@ -1,0 +1,43 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+  th, td{
+    text-align: center;
+  }
+</style>
+
+<?php View::content() ?>
+
+
+<div class="titulo-proyectos">CATEGORÍAS (<?php echo count($categorias) ?>)</div>
+
+<section class="data">
+      <fieldset style="margin:5px;">
+          <table class="table table-striped datatable" style="font-size:12px;">
+            <thead>
+              <th style="width:10%;">Id</th>
+              <th style="text-align:center;">Nombre</th>
+              <th>Descripción</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </thead>
+            <?php foreach ($categorias as $value): ?>
+               <tr>         
+                   <td><?php echo $value->id ?></td>
+                   <td><?php echo $value->nombre ?></td>
+                   <th><?php echo $value->descripcion ?></th>
+                   <?php $id=$value->id; ?>
+                   <td><?php echo Html::link("proyectos/editar_categoria/$id","<span class='glyphicon glyphicon-edit'><span>") ?></td>
+                   <td><?php echo Js::link("proyectos/eliminar_categoria/$id","<span class='glyphicon glyphicon-remove-circle'></span>","¿Esta seguro de eliminar esta categoría?") ?></td>
+                </tr>
+            <?php endforeach ?>
+          </table>
+      </fieldset>
+    </section>

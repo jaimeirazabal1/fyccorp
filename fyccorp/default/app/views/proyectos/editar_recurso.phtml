@@ -1,0 +1,49 @@
+<style>
+  .data input,.data select{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+<?php View::content() ?>
+<div class="titulo-proyectos">EDITAR RECURSO : <?php echo $recursos->nombre ?></div>
+
+<section class="data">
+<?php echo Form::open() ?>
+  <b>Ingrese los siguientes datos y verifique.</b>
+
+  <div class="form-group" style="margin-top:10px;">
+    <div style="float:left;width:49%;margin-right:2%;">
+    <label for="">Categoría (*)</label>
+        <?php echo Form::dbSelect('recursos.categorias_id', 'nombre', array('categorias','buscar'), ' Seleccione ','class="form-control input-sm"');?> 
+    </div>
+     <div style="float:left;width:49%;">
+      <label for="">Nombre (*)</label>
+      <?php echo Form::text("recursos.nombre","class='form-control input-sm' placeholder='nombre'") ?>
+    </div>
+        <div style="float:left;width:49%;margin-right:2%;">
+      <label for="">Abreviatura</label>
+      <?php echo Form::text("recursos.abreviatura","class='form-control input-sm' placeholder='abreviatura'") ?>
+    </div>
+     <div style="float:left;width:29%;margin-right:2%;">
+        <label for="">Cantidad (*)</label>
+      <?php echo Form::text("recursos.cantidad","class='form-control input-sm' placeholder='0'") ?>
+    </div>
+     <div style="float:left;width:18%;">
+       <label for="">Costo Unitario (Bs.F)</label>
+      <?php echo Form::text("recursos.costo","class='form-control input-sm' placeholder='00.00'") ?>
+    </div>
+  </div>
+<?php echo Form::hidden("recursos.id"); ?>
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("proyectos/recursos","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>

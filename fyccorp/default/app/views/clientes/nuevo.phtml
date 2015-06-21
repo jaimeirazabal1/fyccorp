@@ -1,0 +1,49 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+
+</style>
+<?php View::content() ?>
+<div class="titulo-proyectos">NUEVO CLIENTE</div>
+
+<section class="data">
+<?php echo Form::open() ?>
+  <b>Ingrese los siguientes datos y verifique.</b>
+
+  <div class="form-group" style="margin-top:10px;">
+    <label for="">Nombre (*)</label>
+    <?php echo Form::text("cliente.nombre","class='form-control input-sm' placeholder='nombre del cliente, bien sea persona u organización' required") ?>
+    <label for="">Información de Contacto</label>
+    <?php echo Form::textarea("cliente.contacto","class='form-control input-sm' placeholder='datos de la persona de contacto o información relevante'") ?>
+    <div style="float:left;width:49%;margin-right:2%;">
+    <label for="">Email</label>
+    <?php echo Form::email("cliente.correo","class='form-control input-sm' placeholder='email'") ?>
+    </div>
+     <div style="float:left;width:49%;">
+      <label for="">Teléfonos</label>
+      <?php echo Form::text("cliente.telefonos","class='form-control input-sm' placeholder='números telefónicos'") ?>
+    </div>
+        <div style="float:left;width:49%;margin-right:2%;">
+      <label for="">Dirección</label>
+      <?php echo Form::textarea("cliente.direccion","class='form-control input-sm' placeholder='dirección'") ?>
+    </div>
+     <div style="float:left;width:49%;">
+      <label for="">Descripción</label>
+      <?php echo Form::textarea("cliente.descripcion","class='form-control input-sm' placeholder='descripción general'") ?>
+    </div>
+  </div>
+
+  <div style="float:right;margin-top:10px;">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar"/>
+    <?php echo Html::link("clientes/index","Cancelar","class='btn btn-info btn-sm'") ?>
+  </div>
+<?php echo Form::close() ?>
+</div>
+</section>

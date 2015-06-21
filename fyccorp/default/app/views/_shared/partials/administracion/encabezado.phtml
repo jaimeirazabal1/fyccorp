@@ -1,0 +1,66 @@
+<div class="encabe1">
+  <div class="encabezado1">
+
+<div class="menu-admin">
+  <?php echo Html::link("usuarios/listado_usuarios","Usuarios") ?> <br>
+  <?php echo Html::link("usuarios/nuevo","Nuevo Usuario") ?><br>
+  <br>
+  <?php echo Html::link("usuarios/clientes","Clientes") ?><br>
+  <?php echo Html::link("usuarios/nuevo_cliente","Nuevo Cliente") ?>
+</div>
+ 
+ <?php if(!Auth::is_valid()):?>
+<!--LOGIN-->
+  <div class="logo" style="width:320px;">
+    <div class="login">
+       <p style="border-bottom:1px solid #eee;border-bottom-style:dashed;padding-bottom:10px;font-size:18px;text-align:center;">Login</p>
+                <?php echo Form::open("usuario/autenticado") ?>
+                  <div class="form-group" style="margin-bottom:10px;padding-bottom:0">
+                    <label>Usuario</label>
+                     <input type="text" class="form-control" name="pseudonimo" placeholder="" required>
+
+                    <label style="margin-top:10px;">Contraseña</label>
+                     <input type="password" class="form-control" name="clave" placeholder="" required>
+                  </div>
+
+                    <label><a href="#" style="color:#0F8A8C;font-size:12px;padding:0;">¿Ha olvidado su contraseña?</a></label>
+             
+
+                  <div class="btn-search" style="margin-top:10px;">
+                    <div href="#" class="btn btn-default" style="background:#E67817;border:0px;width:131px;position:relative;"><?php echo Html::img("default/iconoingreso.png") ?><input type="submit" value="Acceder" style="background:#E67817;border:0px;color:#fff"/></div>
+                    <a href="http://globalparley.deltasoft.com.ve/usuario/registro" class="btn btn-default" style="background:#0B9FA1;border:0px;width:131px;position:relative;"><?php echo Html::img("default/iconoregistro.png") ?> Registro</a>
+                </div>
+               <?php echo Form::close() ?>      
+    </div>
+  </div>
+<?php else: ?>
+  <div class="logo" style="width:320px;">
+    <div class="login">
+       <p style="border-bottom:1px solid #eee;border-bottom-style:dashed;padding-bottom:10px;font-size:18px;text-align:center;"><?php echo Auth::get("nombre") ?></p>
+
+       <?php
+        $imagen=Auth::get("perfil"); 
+        echo Html::img("$imagen","","style='width:80px;float:left;padding-right:5px;'"); ?>
+        <?php 
+        $profesion=Load::model("profesion")->find(Auth::get("profesion_id"));
+        ?>
+        <p style="font-size:11px;padding-bottom:40px;">
+          <span style="color:#333;padding-right:5px;" class="glyphicon glyphicon-envelope"></span><?php echo Auth::get("correo") ?><br>
+          <span style="color:#333;padding-right:5px;" class="glyphicon glyphicon-earphone"></span><?php echo Auth::get("telefono") ?><br>
+          <span style="color:#333;padding-right:5px;" class="glyphicon glyphicon-briefcase"></span><?php echo $profesion->name_p; ?><br>
+          <span style="color:#333;padding-right:5px;" class="glyphicon glyphicon-map-marker"></span><?php echo Auth::get("ciudad").", ".Auth::get("pais"); ?><br>
+        
+        </p>  
+        <?php $id=Auth::get("id");  ?>
+          <div class="btn-perfil" style="margin-top:10px;float:left">
+            <div href="#" class="btn btn-default" style="background:#E67817;border:0px;width:131px;position:absolute;top:155px;"><span class="glyphicon glyphicon-edit"></span><?php echo Html::link("usuarios/editar_cuenta/$id","Editar Cuenta") ?></div>
+            <!--<div href="#" class="btn btn-default" style="background:#0B9FA1;border:0px;width:131px;position:absolute;top:155px;left:163px;"><span class="glyphicon glyphicon-off"></span><?php //echo Html::link("usuario/logout","Cerrar Sesión") ?></div>-->
+          </div>
+       
+      </div>
+  </div>
+<?php endif ?>
+</div>
+
+
+</div>

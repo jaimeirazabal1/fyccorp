@@ -1,0 +1,64 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+  th, td{
+    text-align: center;
+  }
+</style>
+
+<?php View::content() ?>
+
+
+<div class="titulo-proyectos">USUARIOS (<?php echo count($usuarios) ?>)</div>
+
+<section class="data">
+      <fieldset style="margin:5px;">
+          <table class="table table-striped datatable" style="font-size:12px;">
+            <thead>
+              <th>Id</th>
+              <th>Empleado</th>
+              <th>Usuario</th>
+              <th>Clave</th>
+              <th>Admin</th>
+              <th>Estatus</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </thead>
+            <?php foreach ($usuarios as $value): ?>
+               <tr>  
+                   <td><?php echo $value->id ?></td>       
+                   <td>
+                    <?php if ($value->empleado_id=='' or $value->empleado_id=='0'): ?>
+                    -
+                    <?php else: ?>
+                      <?php $empleado = Load::model("empleado")->find($value->empleado_id) ?>
+                      <?php echo $empleado->cedula; ?>
+                    <?php endif ?>
+                   </td>
+                   <td><?php echo $value->usuario ?></td>
+                   <td>*****</td>
+                   <td><?php if ($value->admin=='1'){
+                    echo 'Sí';
+                   }else{
+                    echo 'No';
+                   } ?></td>
+                   <td><?php if ($value->status=='1'){
+                    echo 'Activo';
+                   }else{
+                    echo 'Inactivo';
+                   } ?></td>
+                   <?php $id=$value->id; ?>
+                   <td><?php echo Html::link("personal/editar_usuario/$id","<span class='glyphicon glyphicon-edit'><span>") ?></td>
+                   <td><?php echo Js::link("personal/eliminar_usuario/$id","<span class='glyphicon glyphicon-remove-circle'></span>","¿Esta seguro de eliminar a esta persona?") ?></td>
+                </tr>
+            <?php endforeach ?>
+          </table>
+      </fieldset>
+    </section>

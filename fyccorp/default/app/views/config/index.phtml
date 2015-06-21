@@ -1,0 +1,28 @@
+<?php View::content() ?>
+
+<?php if (Auth::get("empleado_id")==''): ?>
+  <div style="position:relative;"><h4>Bienvenid@ <?php echo Auth::get("usuario") ?></h4></div>  
+<?php endif ?>
+
+<hr/>
+
+<div class="principal">
+  <?php echo Html::link("proyectos",'<div class="btn-proyectos">
+      '.Html::img("default/proyectos.png").'
+      <p>Proyectos</p>
+    </div>') ?>
+
+  <a href="http://localhost/fyccorp/clientes">
+    <div class="btn-proyectos btn-clientes">
+      <?php echo Html::img("default/clientes.png","","style='margin-top:35px;'") ?>
+      <p>Clientes</p>
+    </div>
+  </a>
+  <a href="http://localhost/fyccorp/personal">
+    <div class="btn-proyectos btn-usuarios">
+      <?php echo Html::img("default/usuarios.png") ?>
+      <p>Usuarios</p>
+    </div>
+  </a>
+
+</div>

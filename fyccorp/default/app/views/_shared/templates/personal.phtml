@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta http-equiv='Content-type' content='text/html; charset=<?php echo APP_CHARSET ?>' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.6">
+  <title>Fyccorp App</title>
+  <?php Tag::css('bienvenida') ?>
+  <?php Tag::css('style') ?>
+  <?php Tag::css('bootstrap/css/bootstrap') ?>
+  <?php Tag::css('humanity/jquery-ui-1.10.3.custom') ?>
+  <?php Tag::css('datatable/css/jquery.dataTables.min') ?>
+  <?php echo Html::includeCss() ?> 
+  <?php echo Tag::js("jquery.min") ?>
+  <?php echo Tag::js("bootstrap/js/bootstrap.min") ?>
+  <?php echo Tag::js("datatable/jquery") ?>
+  <?php echo Tag::js("datatable/jquery.dataTables.min") ?>
+  <?php echo Tag::js("jquery/jquery.kumbiaphp.min") ?>
+  <?php echo Tag::js("combodate") ?>
+  <?php echo Tag::js("moment") ?>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".datatable").DataTable({
+      "language":{
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
+    });
+    })
+  </script> 
+</head>
+<body>
+    <section>
+        <?php View::partial('administracion/menu_personal') ?>
+          <div id="centro" class="centro">
+            <div style="padding:20px;">
+              <?php View::content(); ?>
+            </div>
+          </div>
+        <?php View::partial('administracion/footer') ?>
+    </section>
+</body>
+</html>

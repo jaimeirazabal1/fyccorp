@@ -1,0 +1,80 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+</style>
+<div class="titulo-proyectos">LISTADO DE PROYECTOS (<?php echo count($proyecto) ?>)</div>
+<!--
+<section class="busqueda-proyecto">	
+	<?php// echo Form::open() ?>
+	<div class="form-group">
+		<p><b>Busqueda según parámetros</b></p>
+	  <div class="checkbox">
+	    <label>
+	      Entre <input type="text" id="proyecto_fecha" data-format="YYYY-MM-DD" data-template="D M YYYY" name="proyecto[fecha]">  
+	  
+	    	y <input type="text" id="proyecto_fecha_final" data-format="YYYY-MM-DD" data-template="D M YYYY" name="proyecto[fecha_final]">
+   
+	    </label>
+
+	   </div>
+	    <div class="checkbox" style="margin-top:20px;">
+		    <label style="margin-left:17px;">
+		      <input type="checkbox"> <span style="margin-right:10px;">En espera</span>
+		    </label>
+		     <label>
+		      <input type="checkbox"> <span style="margin-right:10px;">Iniciados</span>
+		    </label>
+		     <label>
+		      <input type="checkbox"> <span style="margin-right:10px;">Finalizados</span>
+		    </label>
+		     <label>
+		      <input type="checkbox"> <span style="margin-right:10px;">Todos</span>
+		    </label>
+		  </div>
+	 </div>
+	<?php// echo Form::close() ?>
+</section>-->
+
+<section class="data">
+      <fieldset style="margin:5px;">
+          <table class="table table-striped datatable" style="font-size:12px;">
+            <thead>
+              <th style="text-align:center;">Id</th>
+              <th>Nombre</th>
+              <th>Cliente</th>
+              <th>Responsable</th>
+              <th>Ver</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </thead>
+            <?php foreach ($proyecto as $value): ?>
+            <?php $responsable=Load::model("empleado")->find($value->responsable); ?>
+               <tr>
+                   <td style="text-align:center;"><?php echo $value->id ?></td>
+                   <?php $cliente=Load::model("cliente")->find($value->cliente_id); ?>
+                   <td><?php echo $value->nombre ?></td>
+                   <td><?php echo $cliente->nombre; ?></td>
+                   <td><?php echo $responsable->nombre ?></td>
+                     <?php $id=$value->id; ?>
+                    <td style="text-align:center;"><?php echo Html::link("proyectos/configuraciones/$id","<span class='glyphicon glyphicon-search'><span>") ?></td>
+                   <td style="text-align:center;"><?php echo Html::link("proyectos/editar/$id","<span class='glyphicon glyphicon-edit'><span>") ?></td>
+                   <td style="text-align:center;"><?php echo Js::link("proyectos/eliminar/$id","<span class='glyphicon glyphicon-remove-circle'></span>","¿Esta seguro de eliminar a este cliente?") ?></td>
+                </tr>
+            <?php endforeach ?>
+          </table>
+      </fieldset>
+    </section>
+
+<script>
+$(function(){
+    $('#proyecto_fecha').combodate();    
+    $('#proyecto_fecha_final').combodate();    
+});
+</script>

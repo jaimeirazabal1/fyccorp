@@ -1,0 +1,61 @@
+<style>
+  .data input{
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    padding-left: 10px;
+  }
+  .data label{
+    margin-top:5px;
+  }
+</style>
+
+<?php View::content() ?>
+
+
+<div class="titulo-proyectos">PERSONAL (<?php echo count($empleados) ?>)</div>
+
+<section class="data">
+      <fieldset style="margin:5px;">
+          <table class="table table-striped datatable" style="font-size:12px;">
+            <thead>
+              <th style="width:10%;"></th>
+              <th style="text-align:center;">Cédula</th>
+              <th>Nombre</th>
+              <th>Cargo</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th style="width:10%">Ingreso</th>
+              <th style="width:10%">Egreso</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </thead>
+            <?php foreach ($empleados as $value): ?>
+               <tr>         
+                   <td>
+                    <?php echo Html::img($value->perfil,"","style='width:50px;'") ?>
+                       <?php if ($value->tipo=='1'): ?>
+                        <b style="background:#333;color:#fff;padding:3px;">E</b>
+                      <?php else: ?>
+                        <b style="background:#333;color:#fff;padding:3px;">C</b>
+                      <?php endif ?>
+                   </td>
+                   <td style="text-align:center;"><?php echo $value->cedula ?></td>
+                   <td><?php echo $value->nombre.' '.$value->apellido ?></td>
+                   <th><?php echo $value->cargo ?></th>
+                   <td><?php echo $value->telefono; ?></td>
+                   <td><?php echo $value->correo ?></td>
+                   <td><?php echo $value->fecha_ingreso ?></td>
+                   <?php if ($value->fecha_egreso=='1969-12-31' or $value->fecha_egreso=='' or $value->fecha_egreso==$value->fecha_ingreso): ?>
+                      <td style="text-align:center;">-</td>
+                   <?php else: ?>
+                      <td><?php echo $value->fecha_egreso ?></td>
+                   <?php endif ?>
+                   <?php $id=$value->id; ?>
+                   <td style="text-align:center;"><?php echo Html::link("personal/editar/$id","<span class='glyphicon glyphicon-edit'><span>") ?></td>
+                   <td style="text-align:center;"><?php echo Js::link("personal/eliminar/$id","<span class='glyphicon glyphicon-remove-circle'></span>","¿Esta seguro de eliminar a esta persona?") ?></td>
+                </tr>
+            <?php endforeach ?>
+          </table>
+      </fieldset>
+    </section>

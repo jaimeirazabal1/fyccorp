@@ -1,0 +1,114 @@
+<?php echo View::content() ?>
+<h1>Horas</h1>
+<?php $counter = 1 ?>
+<p><?php echo $dias_diferencia ?> dias</p>
+<?php $fecha_inicio = $actividad->comienzo ?>
+<?php for ($i=0; $i < $dias_diferencia; $i++) : ?>
+	<?php if ($i%7 == 0): ?>
+			
+		<fieldset>
+			<legend> <?php echo $semana = "Semana ".$counter ?> <button class="btn btn-primary btn-xs">Guardar</button></legend>
+			<table class="table table-bordered table-striped" >
+				<thead>
+					<th>Descripcion</th>
+					<?php if ($i == 0): ?>
+						<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+						<th><?php echo $fecha_inicio ?> <br>Lun </th>
+						<?php else: ?>
+						<th class="bg-danger">--</th>
+						<?php endif ?>
+					<?php else: ?>
+						<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+							<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br> Lun </th>
+						<?php else: ?>
+							<th class="bg-danger">--</th>
+						<?php endif ?>
+					<?php endif ?>
+
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+						<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Mar</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+					<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Mie</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+					<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Jue</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+					<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Vie</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+					<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Sab</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<?php if (!Util::fecha1MayorQueFecha2($fecha_inicio,$actividad->fin)): ?>
+					<th><?php echo $fecha_inicio = Util::sumarDiasAFecha($fecha_inicio) ?> <br>Dom</th>
+					<?php else: ?>
+						<th class="bg-danger">--</th>
+					<?php endif ?>
+					<th>Total</th>
+				</thead>
+				<tbody>
+					<tr semana="<?php echo str_replace(" ", "_", $semana)?>">
+						<td contenteditable class="textarea" id="descripcion"></td>
+						<td contenteditable class="textarea" id="lunes"></td>
+						<td contenteditable class="textarea" id="martes"></td>
+						<td contenteditable class="textarea" id="miercoles"></td>
+						<td contenteditable class="textarea" id="jueves"></td>
+						<td contenteditable class="textarea" id="viernes"></td>
+						<td contenteditable class="textarea" id="sabado"></td>
+						<td contenteditable class="textarea" id="domingo"></td>
+						<td contenteditable class="textarea" id="total"></td>
+					</tr>
+					<tr horasextras="1" semana="<?php echo str_replace(" ", "_", $semana)?>">
+						<td> <center><b>Horas Extras</b></center></td>
+						<td contenteditable class="textarea"  id="lunes_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="martes_e"class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="miercoles_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="jueves_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="viernes_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="sabado_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" id="domingo_e" class="horas_extras textarea"> </td>
+						<td contenteditable class="textarea" ></td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+		<?php $counter++ ?>
+	<?php endif; ?>
+<?php endfor; ?>
+<br>
+<style type="text/css">
+	.horas_extras{
+		background-image:url(<?php echo PUBLIC_PATH.'img/horas_extras.png'?>);
+		background-position: center; 
+		background-size: 60px 30px;
+		background-repeat: no-repeat;
+		background-opacity: 0.3;
+		
+	}
+
+
+</style>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("body").on("keyup","[contenteditable]",function(){
+			semana = $(this).parent().attr("semana");
+			horas_extra = $(this).parent().attr("horasextras");
+			console.log(semana,horas_extra)
+		})
+	})
+</script>
+
