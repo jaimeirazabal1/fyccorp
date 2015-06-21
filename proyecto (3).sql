@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-06-2015 a las 20:46:49
+-- Tiempo de generación: 21-06-2015 a las 15:18:25
 -- Versión del servidor: 5.5.43-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -151,8 +151,17 @@ CREATE TABLE IF NOT EXISTS `horas` (
   `domingo_e` int(2) DEFAULT NULL,
   `descripcion` varchar(3000) DEFAULT NULL,
   `semana` varchar(10) NOT NULL,
+  `total` int(11) DEFAULT NULL,
+  `total_e` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `horas`
+--
+
+INSERT INTO `horas` (`id`, `actividades_id`, `recursohumano_id`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `sabado`, `domingo`, `lunes_e`, `martes_e`, `miercoles_e`, `jueves_e`, `viernes_e`, `sabado_e`, `domingo_e`, `descripcion`, `semana`, `total`, `total_e`) VALUES
+(4, 6, 1, 1, 2, 3, NULL, NULL, NULL, NULL, 1, 2, 3, NULL, NULL, NULL, NULL, 'primera descripcion', 'Semana 1', 6, 6);
 
 -- --------------------------------------------------------
 
